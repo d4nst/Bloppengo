@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>{{ page_subheader }}</h2>
+    <hr>
+
+    <form method="post" action="{% url 'admin' %}" class="form-inline">
+        {% csrf_token %}
+        <input type="text" class="form-control" name="username" placeholder="Username" >
+        <button type="submit" name="search" class="btn btn-primary">Search</button>
+        <button type="submit" name="list" class="btn btn-primary">View all</button>
+    </form>
+
+    <table class="table table-hover" style="margin-top: 20px">
+        <thead>
+            <th>Username</th>
+            <th class="text-center">Admin</th>
+            <th class="text-center">Blogger</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {% for user, admin, blogger in users_zipped %}
+                <tr id="row-{{ user.id }}">
+                    <td>{{ user }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'toggle_role' user.id 'admin' %}" data-ajax="true" data-success="toggle_checkbox">
+                            {% if admin %}
+                                <input id="checkbox-admin" type="checkbox" checked>
+                            {% else %}
+                                <input id="checkbox-admin" type="checkbox" >
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'toggle_role' user.id 'blogger' %}" data-ajax="true" data-success="toggle_checkbox">
+                            {% if blogger %}
+                                <input id="checkbox-blogger" type="checkbox" checked>
+                            {% else %}
+                                <input id="checkbox-blogger" type="checkbox" >
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td><a href="{% url 'delete_user' user.id %}" class="btn btn-link md"
+                               data-ajax="true" data-success="delete_user"><i class="glyphicon glyphicon-remove icon-red"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if user_list.paginator.num_pages %}
+        <ul class="pager">
+            {% if user_list.has_previous %}
+                <li ><a href="?page={{ user_list.previous_page_number }}" class="btn-pager">Previous</a></li>
+            {% endif %}
+            {% if user_list.has_next %}
+                <li><a href="?page={{ user_list.next_page_number }}" class="btn-pager">Next</a></li>
+            {% endif %}
+            <div class="pager-footer">
+               {{ user_list.number }} / {{ user_list.paginator.num_pages }}
+            </div>
+        </ul>
+    {% endif %}
+
+
+
+{% endblock %}

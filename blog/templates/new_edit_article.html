@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>{{ page_subheader }}</h2>
+    <hr>
+
+    {% if msg %}
+        <div class="alert alert-danger">
+            <p>{{ msg }}</p>
+        </div>
+
+    {% else %}
+
+        {% if article.id %}
+            <form method="post" action="{% url 'edit_article' article.id %}?next={{ from }}">
+        {% else %}
+            <form method="post" action="{% url 'new_article' %}">
+        {% endif %}
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" id="article-header" name="header" placeholder="Header" value="{{ article.header }}" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="article-content" name="content" placeholder="Content" rows="20" required>{{ article.content }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary pull-right">Save</button>
+
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <p>The header is too long</p>
+                    </div>
+                {% endif %}
+            </form>
+
+    {% endif %}
+
+
+{% endblock %}

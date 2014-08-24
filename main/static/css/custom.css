@@ -1,0 +1,87 @@
+body {
+  padding-top: 70px;
+  font-size: 16px;
+}
+p {
+    font-size: 16px;    
+}
+a:hover {
+    text-decoration: none; 
+}
+a {
+    color: #34495e;
+}
+.container .subcontainer {
+    margin-top: 60px; 
+}
+.btn-link {
+    font-size: 18px;
+    color: #BDC3C7;
+}
+.btn-link.active {
+    font-size: 18px;
+    color: #16a085;
+}
+.btn-link.lg {
+    font-size: 22px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-right: 2px;
+
+}
+.btn-link.md {
+    font-size: 20px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-right: 7px;
+}
+.select .btn {
+  width: 120px;
+}
+.icon-red {
+    color: #e74c3c;
+}
+.icon-blue {
+    color: #2980b9;
+}
+.icon-grey {
+    color: #BDC3C7;
+}
+.icon-yellow {
+    color: #f1c40f;
+}
+.icon-green {
+    color: #1abc9c
+}
+.pre-line {
+    white-space: pre-line;
+}
+.article-content {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+.article-body {
+    margin-bottom: 150px;
+}
+.btn-pager {
+    width:100px;
+}
+.pager-footer {
+    margin-top:10px;
+    font-size:0.9em;
+}
+.nav-username {
+    background-color: #428bca;
+    color: #ecf0f1 !important;
+    padding-left:15px;
+    padding-right: 15px;
+    border-radius: 25px;
+}
+.pull-bottom {
+    display: inline-block;
+    vertical-align: bottom;
+    float: none;
+}
+.icons {
+    width: 230px;
+}

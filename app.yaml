@@ -1,0 +1,36 @@
+application: bloppengo
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+builtins:
+- remote_api: on
+
+inbound_services:
+- warmup
+
+handlers:
+- url: /static
+  static_dir: main/static
+  expiration: '1m'
+
+- url: /static/django_ajax
+  static_dir: django_ajax/static
+  expiration: '1m'
+
+- url: /_ah/queue/deferred
+  script: djangoappengine.deferred.handler.application
+  login: admin
+
+- url: /_ah/stats/.*
+  script: djangoappengine.appstats.application
+
+- url: /media/admin
+  static_dir: django/contrib/admin/media
+  expiration: '0'
+
+- url: /.*
+  script: djangoappengine.main.application
+
+

@@ -1,0 +1,21 @@
+from django.conf.urls import patterns, url
+
+urlpatterns = patterns('',
+    url(r'^admin/$', 'blog.views.admin', name='admin'),
+    url(r'^admin/user/(?P<user_id>\d+)/delete/$', 'blog.views.delete_user', name='delete_user'),
+    url(r'^admin/user/(?P<user_id>\d+)/(?P<role>\w+)/$', 'blog.views.toggle_role', name='toggle_role'),
+    url(r'^signup/$', 'blog.views.signup', name='signup'),
+    url(r'^$', 'blog.views.index', name='index'),
+    #url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login'),
+    url(r'^login/$', 'blog.views.login_view', name='login_view'),
+    url(r'^logout/$', 'blog.views.logout_view', name='logout_view'),
+    url(r'^myarticles/$', 'blog.views.my_articles', name='my_articles'),
+    url(r'^myarticles/new/$', 'blog.views.new_article', name='new_article'),
+    url(r'^saved/$', 'blog.views.my_saved_articles', name='my_saved_articles'),
+    url(r'^favourites/$', 'blog.views.my_favourite_articles', name='my_favourite_articles'),
+    url(r'^articles/(?P<article_id>\d+)/$', 'blog.views.view_article', name='view_article'),
+    url(r'^articles/(?P<article_id>\d+)/edit', 'blog.views.edit_article', name='edit_article'),
+    url(r'^articles/(?P<article_id>\d+)/delete/$', 'blog.views.delete_article', name='delete_article'),
+    url(r'^articles/(?P<article_id>\d+)/save/$', 'blog.views.save_article', name='save_article'),
+    url(r'^articles/(?P<article_id>\d+)/favourite/$', 'blog.views.favourite_article', name='favourite_article'),
+)

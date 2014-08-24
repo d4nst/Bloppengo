@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if page_header == 'My Articles' %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <h3>
+                    <a href="{% url 'new_article' %}"><i class="glyphicon glyphicon-pencil" style="padding-right: 10px;">
+                    </i>Click here to write a new article</a>
+                </h3>
+            </div>
+        </div>
+    {% endif %}
+
+    {% for article, saved_article, favourite_article in articles_zipped %}
+
+        <div id="article-{{ article.id }}" class="article-body">
+            <div class="page-header">
+                <div class="h2 row">
+
+                    <div class=" col-md-8 pull-bottom">
+
+                        <a href="{% url 'view_article' article.id %}">{{ article.header }}</a>
+                    </div>
+
+                    <div class="col-md-3 pull-bottom">
+                        <div class="icons">
+                            {% if blogger and article.written_by == request.user or admin %}
+                                <a href="{% url 'edit_article' article.id %}?from={{ request.path|urlencode }}" class="btn btn-link lg">
+                                    <i class="glyphicon glyphicon-edit icon-blue"></i></a>
+                                <a href="{% url 'delete_article' article.id %}" class="btn btn-link lg"
+                                   data-ajax="true" data-success="delete_article"><i class="glyphicon glyphicon-remove icon-red"></i></a>
+                            {% endif %}
+                            {% if reader %}
+
+                                <a href="{% url 'save_article' article.id %}" class="btn btn-link lg"
+                                   data-ajax="true" data-success="save_article">
+                                    {% if saved_article %}
+                                        <i class="glyphicon glyphicon-bookmark icon-green"></i>
+                                    {% else %}
+                                        <i class="glyphicon glyphicon-bookmark"></i>
+                                    {% endif %}
+                                </a>
+
+                                <a href="{% url 'favourite_article' article.id %}" class="btn btn-link lg"
+                                   data-ajax="true" data-success="favourite_article">
+                                    {% if favourite_article %}
+                                        <i class="glyphicon glyphicon-star icon-yellow"></i>
+                                    {% else %}
+                                        <i class="glyphicon glyphicon-star"></i>
+                                    {% endif %}
+                                </a>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="article-content">
+                <p class="pre-line">{{ article.content }}</p>
+            </div>
+            <p class="pull-right" style="font-size:0.9em"><strong>{{ article.created|date:"M d, Y" }} | {{ article.written_by }}</strong></p>
+        </div>
+    {% endfor %}
+
+    {% if articles.paginator.num_pages != 1 %}
+        <ul class="pager">
+            {% if articles.has_previous %}
+                <li ><a href="?page={{ articles.previous_page_number }}" class="btn-pager">Previous</a></li>
+            {% endif %}
+            {% if articles.has_next %}
+                <li><a href="?page={{ articles.next_page_number }}" class="btn-pager">Next</a></li>
+            {% endif %}
+            <div class="pager-footer">
+               {{ articles.number }} / {{ articles.paginator.num_pages }}
+            </div>
+        </ul>
+    {% endif %}
+
+
+{% endblock %}
+
