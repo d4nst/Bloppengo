@@ -27,14 +27,14 @@
                     <div class="col-md-3 pull-bottom">
                         <div class="icons">
                             {% if blogger and article.written_by == request.user or admin %}
-                                <a href="{% url 'edit_article' article.id %}?from={{ request.path|urlencode }}" class="btn btn-link lg">
+                                <a href="{% url 'edit_article' article.id %}?from={{ request.path|urlencode }}" title="Edit" class="btn btn-link lg">
                                     <i class="glyphicon glyphicon-edit icon-blue"></i></a>
-                                <a href="{% url 'delete_article' article.id %}" class="btn btn-link lg"
+                                <a href="{% url 'delete_article' article.id %}" class="btn btn-link lg" title="Delete"
                                    data-ajax="true" data-success="delete_article"><i class="glyphicon glyphicon-remove icon-red"></i></a>
                             {% endif %}
                             {% if reader %}
 
-                                <a href="{% url 'save_article' article.id %}" class="btn btn-link lg"
+                                <a href="{% url 'save_article' article.id %}" class="btn btn-link lg" title="Save for later"
                                    data-ajax="true" data-success="save_article">
                                     {% if saved_article %}
                                         <i class="glyphicon glyphicon-bookmark icon-green"></i>
@@ -43,7 +43,7 @@
                                     {% endif %}
                                 </a>
 
-                                <a href="{% url 'favourite_article' article.id %}" class="btn btn-link lg"
+                                <a href="{% url 'favourite_article' article.id %}" class="btn btn-link lg" title="Add to Favourites"
                                    data-ajax="true" data-success="favourite_article">
                                     {% if favourite_article %}
                                         <i class="glyphicon glyphicon-star icon-yellow"></i>
