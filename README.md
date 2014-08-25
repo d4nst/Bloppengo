@@ -16,7 +16,7 @@ There are three type of users in Bloppengo:
   - Blogger: Reader + create, edit and delete their own articles.
   - Admin: Reader + manage users, and edit and delete all the articles.
   
-Go to http://bloppengo.appspot.com/articles/5144752345317376/ for more instructions about how to start using the app.
+Go to http://bloppengo.appspot.com/articles/6207356513812480/ for more instructions about how to start using the app.
 
 ##Components
 
